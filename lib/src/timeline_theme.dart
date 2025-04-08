@@ -2,7 +2,6 @@ import 'dart:ui';
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 
 import 'connector_theme.dart';
 import 'indicator_theme.dart';
@@ -74,8 +73,7 @@ class TimelineTheme extends StatelessWidget {
   /// }
   /// ```
   static TimelineThemeData of(BuildContext context) {
-    final inheritedTheme =
-        context.dependOnInheritedWidgetOfExactType<_InheritedTheme>();
+    final inheritedTheme = context.dependOnInheritedWidgetOfExactType<_InheritedTheme>();
     return inheritedTheme?.theme.data ?? _kFallbackTheme;
   }
 
@@ -93,8 +91,7 @@ class TimelineTheme extends StatelessWidget {
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
-    properties.add(
-        DiagnosticsProperty<TimelineThemeData>('data', data, showName: false));
+    properties.add(DiagnosticsProperty<TimelineThemeData>('data', data, showName: false));
   }
 }
 
@@ -109,11 +106,8 @@ class _InheritedTheme extends InheritedTheme {
 
   @override
   Widget wrap(BuildContext context, Widget child) {
-    final ancestorTheme =
-        context.findAncestorWidgetOfExactType<_InheritedTheme>();
-    return identical(this, ancestorTheme)
-        ? child
-        : TimelineTheme(data: theme.data, child: child);
+    final ancestorTheme = context.findAncestorWidgetOfExactType<_InheritedTheme>();
+    return identical(this, ancestorTheme) ? child : TimelineTheme(data: theme.data, child: child);
   }
 
   @override
@@ -187,8 +181,7 @@ class TimelineThemeData with Diagnosticable {
     ConnectorThemeData? connectorTheme,
   }) {
     direction ??= Axis.vertical;
-    color ??= Colors
-        .blue; // TODO: Need to change the default color to the theme color?
+    color ??= Colors.blue; // TODO: Need to change the default color to the theme color?
     nodePosition ??= 0.5;
     nodeItemOverlap ??= false;
     indicatorPosition ??= 0.5;
@@ -294,8 +287,7 @@ class TimelineThemeData with Diagnosticable {
   /// The arguments must not be null.
   ///
   /// {@macro dart.ui.shadow.lerp}
-  static TimelineThemeData lerp(
-      TimelineThemeData a, TimelineThemeData b, double t) {
+  static TimelineThemeData lerp(TimelineThemeData a, TimelineThemeData b, double t) {
     // Warning: make sure these properties are in the exact same order as in
     // hashValues() and in the raw constructor and in the order of fields in
     // the class and in the lerp() method.
@@ -304,12 +296,9 @@ class TimelineThemeData with Diagnosticable {
       color: Color.lerp(a.color, b.color, t)!,
       nodePosition: lerpDouble(a.nodePosition, b.nodePosition, t)!,
       nodeItemOverlap: t < 0.5 ? a.nodeItemOverlap : b.nodeItemOverlap,
-      indicatorPosition:
-          lerpDouble(a.indicatorPosition, b.indicatorPosition, t)!,
-      indicatorTheme:
-          IndicatorThemeData.lerp(a.indicatorTheme, b.indicatorTheme, t),
-      connectorTheme:
-          ConnectorThemeData.lerp(a.connectorTheme, b.connectorTheme, t),
+      indicatorPosition: lerpDouble(a.indicatorPosition, b.indicatorPosition, t)!,
+      indicatorTheme: IndicatorThemeData.lerp(a.indicatorTheme, b.indicatorTheme, t),
+      connectorTheme: ConnectorThemeData.lerp(a.connectorTheme, b.connectorTheme, t),
     );
   }
 
@@ -319,14 +308,7 @@ class TimelineThemeData with Diagnosticable {
     // Warning: make sure these properties are in the exact same order as in
     // hashValues() and in the raw constructor and in the order of fields in
     // the class and in the lerp() method.
-    return other is TimelineThemeData &&
-        other.direction == direction &&
-        other.color == color &&
-        other.nodePosition == nodePosition &&
-        other.nodeItemOverlap == nodeItemOverlap &&
-        other.indicatorPosition == indicatorPosition &&
-        other.indicatorTheme == indicatorTheme &&
-        other.connectorTheme == connectorTheme;
+    return other is TimelineThemeData && other.direction == direction && other.color == color && other.nodePosition == nodePosition && other.nodeItemOverlap == nodeItemOverlap && other.indicatorPosition == indicatorPosition && other.indicatorTheme == indicatorTheme && other.connectorTheme == connectorTheme;
   }
 
   @override
@@ -343,7 +325,7 @@ class TimelineThemeData with Diagnosticable {
       indicatorTheme,
       connectorTheme,
     ];
-    return hashList(values);
+    return Object.hashAll(values);
   }
 
   @override
@@ -351,17 +333,11 @@ class TimelineThemeData with Diagnosticable {
     super.debugFillProperties(properties);
     final defaultData = TimelineThemeData.fallback();
     properties
-      ..add(DiagnosticsProperty<Axis>('direction', direction,
-          defaultValue: defaultData.direction, level: DiagnosticLevel.debug))
-      ..add(ColorProperty('color', color,
-          defaultValue: defaultData.color, level: DiagnosticLevel.debug))
-      ..add(DoubleProperty('nodePosition', nodePosition,
-          defaultValue: defaultData.nodePosition, level: DiagnosticLevel.debug))
-      ..add(FlagProperty('nodeItemOverlap',
-          value: nodeItemOverlap, ifTrue: 'overlap connector and indicator'))
-      ..add(DoubleProperty('indicatorPosition', indicatorPosition,
-          defaultValue: defaultData.indicatorPosition,
-          level: DiagnosticLevel.debug))
+      ..add(DiagnosticsProperty<Axis>('direction', direction, defaultValue: defaultData.direction, level: DiagnosticLevel.debug))
+      ..add(ColorProperty('color', color, defaultValue: defaultData.color, level: DiagnosticLevel.debug))
+      ..add(DoubleProperty('nodePosition', nodePosition, defaultValue: defaultData.nodePosition, level: DiagnosticLevel.debug))
+      ..add(FlagProperty('nodeItemOverlap', value: nodeItemOverlap, ifTrue: 'overlap connector and indicator'))
+      ..add(DoubleProperty('indicatorPosition', indicatorPosition, defaultValue: defaultData.indicatorPosition, level: DiagnosticLevel.debug))
       ..add(DiagnosticsProperty<IndicatorThemeData>(
         'indicatorTheme',
         indicatorTheme,
